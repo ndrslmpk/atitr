@@ -1,0 +1,17 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    // "mikestead.dotenv",
+    // "hediet.vscode-drawio",
+    // "github.vscode-github-actions",
+    // "github.vscode-pull-request-github",
+    // "hashicorp.terraform",
+    // "firsttris.vscode-jest-runner",
+    // "github.copilot-chat",
+    // "yoavbls.pretty-ts-errors",
+    // "prisma.prisma",
+    // "bradlc.vscode-tailwindcss",
+    // "orta.vscode-jest"
+  ]
+}
