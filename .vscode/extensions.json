@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
+    // Leave some inspirations
     // "mikestead.dotenv",
     // "hediet.vscode-drawio",
     // "github.vscode-github-actions",
