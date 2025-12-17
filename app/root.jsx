@@ -5,8 +5,8 @@ export default function App() {
     <html>
       <head>
         <link rel="icon" href="data:image/x-icon;base64,AA" />
-      <Meta />
-      <Links />
+        <Meta />
+        <Links />
       </head>
       <body>
         <h1>Hello World!</h1>
@@ -14,5 +14,5 @@ export default function App() {
         <Scripts />
       </body>
     </html>
-  )
+  );
 }
