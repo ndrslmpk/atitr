@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PassThrough } from "node:stream";
 import { createReadableStreamFromReadable } from "@remix-run/node";
-import { RemixServer, Meta, Links, Outlet, Scripts } from "@remix-run/react";
+import { RemixServer, Meta, Links, LiveReload, Form, ScrollRestoration, Scripts } from "@remix-run/react";
 import * as isbotModule from "isbot";
 import { renderToPipeableStream } from "react-dom/server";
 const ABORT_DELAY = 5e3;
@@ -116,15 +116,52 @@ const entryServer = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineP
   default: handleRequest
 }, Symbol.toStringTag, { value: "Module" }));
 function App() {
-  return /* @__PURE__ */ jsxs("html", { children: [
+  return /* @__PURE__ */ jsxs("html", { lang: "en", children: [
     /* @__PURE__ */ jsxs("head", { children: [
-      /* @__PURE__ */ jsx("link", { rel: "icon", href: "data:image/x-icon;base64,AA" }),
+      /* @__PURE__ */ jsx("meta", { charSet: "utf-8" }),
+      /* @__PURE__ */ jsx(
+        "meta",
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1"
+        }
+      ),
       /* @__PURE__ */ jsx(Meta, {}),
       /* @__PURE__ */ jsx(Links, {})
     ] }),
     /* @__PURE__ */ jsxs("body", { children: [
-      /* @__PURE__ */ jsx("h1", { children: "Hello World!" }),
-      /* @__PURE__ */ jsx(Outlet, {}),
+      /* @__PURE__ */ jsx(LiveReload, {}),
+      /* @__PURE__ */ jsxs("div", { id: "sidebar", children: [
+        /* @__PURE__ */ jsx("h1", { children: "Remix Contacts" }),
+        /* @__PURE__ */ jsxs("div", { children: [
+          /* @__PURE__ */ jsxs(Form, { id: "search-form", role: "search", children: [
+            /* @__PURE__ */ jsx(
+              "input",
+              {
+                "aria-label": "Search contacts",
+                id: "q",
+                name: "q",
+                placeholder: "Search",
+                type: "search"
+              }
+            ),
+            /* @__PURE__ */ jsx(
+              "div",
+              {
+                "aria-hidden": true,
+                hidden: true,
+                id: "search-spinner"
+              }
+            )
+          ] }),
+          /* @__PURE__ */ jsx(Form, { method: "post", children: /* @__PURE__ */ jsx("button", { type: "submit", children: "New" }) })
+        ] }),
+        /* @__PURE__ */ jsx("nav", { children: /* @__PURE__ */ jsxs("ul", { children: [
+          /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: `/contacts/1`, children: "Your Name" }) }),
+          /* @__PURE__ */ jsx("li", { children: /* @__PURE__ */ jsx("a", { href: `/contacts/2`, children: "Your Friend" }) })
+        ] }) })
+      ] }),
+      /* @__PURE__ */ jsx(ScrollRestoration, {}),
       /* @__PURE__ */ jsx(Scripts, {})
     ] })
   ] });
@@ -133,7 +170,7 @@ const route0 = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProper
   __proto__: null,
   default: App
 }, Symbol.toStringTag, { value: "Module" }));
-const serverManifest = { "entry": { "module": "/assets/entry.client-BtqYPRl1.js", "imports": ["/assets/components-DywfF5cg.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-CNvauDil.js", "imports": ["/assets/components-DywfF5cg.js"], "css": [] } }, "url": "/assets/manifest-6009dce8.js", "version": "6009dce8" };
+const serverManifest = { "entry": { "module": "/assets/entry.client-CpLu_4wQ.js", "imports": ["/assets/components-CdenNAPi.js"], "css": [] }, "routes": { "root": { "id": "root", "parentId": void 0, "path": "", "index": void 0, "caseSensitive": void 0, "hasAction": false, "hasLoader": false, "hasClientAction": false, "hasClientLoader": false, "hasErrorBoundary": false, "module": "/assets/root-C8qZCzTl.js", "imports": ["/assets/components-CdenNAPi.js"], "css": [] } }, "url": "/assets/manifest-93bfed08.js", "version": "93bfed08" };
 const mode = "production";
 const assetsBuildDirectory = "build/client";
 const basename = "/";
