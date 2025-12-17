@@ -4,6 +4,6 @@ This is an agency time tracking system based on the remix web framework
 
 # Tech
 
-## ESLint
+## Extensions
 
-is used to find code problems within your project. I like to directly integrate ESLint.
+We recommend using the recommended vscode extensions to make sense of given configuration files that support your development process.
