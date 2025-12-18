@@ -1,5 +1,6 @@
 import {
   Form,
+  Link,
   Outlet,
   Scripts,
   ScrollRestoration,
@@ -36,6 +37,9 @@ export default function App() {
             </li>
             <li>
               <a href={`/contacts/2`}>Your Friend</a>
+            </li>
+            <li>
+              <Link to='/contacts/3'>Your Next Best Friend</Link>
             </li>
           </ul>
         </nav>
