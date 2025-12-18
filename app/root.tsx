@@ -16,16 +16,8 @@ export async function clientLoader() {
   return { contacts };
 }
 
-type LoaderData = { loaderData: { contacts: Array<Contact> } };
-type Contact = {
-  first: String;
-  last: String;
-  id: React.Key;
-  favorite: String;
-};
-
 // clientLoader results in loaderData
-export default function App({ loaderData }: LoaderData) {
+export default function App({ loaderData }: Route.ComponentProps) {
   const { contacts } = loaderData;
   return (
     <>
@@ -70,7 +62,7 @@ export default function App({ loaderData }: LoaderData) {
           </ul>
           {contacts.length ? (
             <ul>
-              {contacts.map((contact: Contact) => (
+              {contacts.map((contact) => (
                 <li key={contact.id}>
                   <Link to={`contacts/${contact.id}`}>
                     {contact.first || contact.last ? (
@@ -147,5 +139,14 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
         </pre>
       )}
     </main>
+  );
+}
+
+export function HydrateFallback() {
+  return (
+    <div id="loading-splash">
+      <div id="loading-splash-spinner" />
+      <p>Loading, please wait...</p>
+    </div>
   );
 }
