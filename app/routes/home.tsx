@@ -9,5 +9,11 @@ export function meta({}: Route.MetaArgs) {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return (
+    <p id="index-page">
+      This is a demo for Atitr.
+      <br />
+      Check out <a href="/product">our product page for more</a>
+    </p>
+  );
 }

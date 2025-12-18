@@ -22,7 +22,7 @@ export default function App({ loaderData }: Route.ComponentProps) {
   return (
     <>
       <div id="sidebar">
-        <h1>React Router Contacts</h1>
+        <h1>Atitr Time Tracking</h1>
         <div>
           <Form id="search-form" role="search">
             <input
@@ -85,6 +85,10 @@ export default function App({ loaderData }: Route.ComponentProps) {
         </nav>
       </div>
       <div id="detail">
+        {/* TO be refactored into an own component */}
+        <div id="HeaderMenu">
+          <Link to="/product">Product</Link>
+        </div>
         <Outlet />
       </div>
     </>
