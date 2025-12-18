@@ -9,90 +9,10 @@ import {
 import type { Route } from "./+types/root";
 
 import appStylesHref from "./app.css?url";
-import { getContacts } from "./data";
-
-export async function clientLoader() {
-  const contacts = await getContacts();
-  return { contacts };
-}
 
 // clientLoader results in loaderData
-export default function App({ loaderData }: Route.ComponentProps) {
-  const { contacts } = loaderData;
-  return (
-    <>
-      <div id="sidebar">
-        <h1>Atitr Time Tracking</h1>
-        <div>
-          <Form id="search-form" role="search">
-            <input
-              aria-label="Search contacts"
-              id="q"
-              name="q"
-              placeholder="Search"
-              type="search"
-            />
-            <div aria-hidden hidden={true} id="search-spinner" />
-          </Form>
-          <Form method="post">
-            <button type="submit">New</button>
-          </Form>
-        </div>
-        <nav>
-          <ul>
-            <li>
-              <a href={`/contacts/1`}>
-                Your Name<span className="linktype ssr">server</span>
-              </a>
-            </li>
-            <li>
-              <a href={`/contacts/2`}>
-                Your Friend <span className="linktype ssr">server</span>
-              </a>
-            </li>
-            <li>
-              <Link to="/contacts/3">
-                Your Next Best Client Friend{" "}
-                <span className="linktype client">client</span>
-              </Link>
-            </li>
-            <li>
-              <hr />
-            </li>
-          </ul>
-          {contacts.length ? (
-            <ul>
-              {contacts.map((contact) => (
-                <li key={contact.id}>
-                  <Link to={`contacts/${contact.id}`}>
-                    {contact.first || contact.last ? (
-                      <>
-                        {contact.first} {contact.last}
-                      </>
-                    ) : (
-                      <i>No Name</i>
-                    )}
-                    {contact.favorite ? <span>*</span> : null}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>
-              <i>No contacts</i>
-            </p>
-          )}
-        </nav>
-      </div>
-      <div id="detail">
-        {/* TO be refactored into an own component */}
-        <div id="HeaderMenu">
-          <Link to="/product">Product</Link>
-        </div>
-        <Outlet />
-      </div>
-    </>
-  );
+export default function App() {
+  return <Outlet />;
 }
 
 // The Layout component is a special export for the root route.
