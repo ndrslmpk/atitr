@@ -1,16 +1,26 @@
 import { Form } from "react-router";
 
-import type { ContactRecord } from "../data";
+import { getContact, type ContactRecord } from "../data";
+import type { Route } from "./+types/contact";
 
-export default function Contact() {
-  const contact = {
-    first: "Your",
-    last: "Name",
-    avatar: "https://placecats.com/200/200",
-    twitter: "your_handle",
-    notes: "Some notes",
-    favorite: true,
-  };
+export async function loader({ params }: Route.LoaderArgs) {
+  const contact = await getContact(params.contactId);
+  if (!contact) {
+    throw new Response("Not Found", { status: 404 });
+  }
+  return { contact };
+}
+
+export default function Contact({ loaderData }: Route.ComponentProps) {
+  const { contact } = loaderData;
+  // const contact = {
+  //   first: "Your",
+  //   last: "Name",
+  //   avatar: "https://placecats.com/200/200",
+  //   twitter: "your_handle",
+  //   notes: "Some notes",
+  //   favorite: true,
+  // };
 
   return (
     <div id="contact">
@@ -36,9 +46,7 @@ export default function Contact() {
 
         {contact.twitter ? (
           <p>
-            <a
-              href={`https://twitter.com/${contact.twitter}`}
-            >
+            <a href={`https://twitter.com/${contact.twitter}`}>
               {contact.twitter}
             </a>
           </p>
@@ -71,21 +79,13 @@ export default function Contact() {
   );
 }
 
-function Favorite({
-  contact,
-}: {
-  contact: Pick<ContactRecord, "favorite">;
-}) {
+function Favorite({ contact }: { contact: Pick<ContactRecord, "favorite"> }) {
   const favorite = contact.favorite;
 
   return (
     <Form method="post">
       <button
-        aria-label={
-          favorite
-            ? "Remove from favorites"
-            : "Add to favorites"
-        }
+        aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
         name="favorite"
         value={favorite ? "false" : "true"}
       >

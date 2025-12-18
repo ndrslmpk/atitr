@@ -3,7 +3,7 @@ import { Link } from "react-router";
 export default function Product() {
   return (
     <div>
-      <Link to="/">← Go to demo</Link>
+      <Link to="/">← Go to Home</Link>
 
       <h1>Atitr</h1>
       <p>
