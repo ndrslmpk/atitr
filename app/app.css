@@ -208,6 +208,22 @@ body {
   color: inherit;
 }
 
+#sidebar nav a span.linktype {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.25rem;
+  border-radius: 0.5rem;
+}
+
+#sidebar nav a span.linktype.client {
+  color: white;
+  background-color: #444444;
+
+}
+#sidebar nav a span.linktype.ssr{
+  color: rgb(39, 39, 39);
+  background-color: #dadada;
+}
+
 i {
   color: #818181;
 }

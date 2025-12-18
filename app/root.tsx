@@ -9,8 +9,24 @@ import {
 import type { Route } from "./+types/root";
 
 import appStylesHref from "./app.css?url";
+import { getContacts } from "./data";
 
-export default function App() {
+export async function clientLoader() {
+  const contacts = await getContacts();
+  return { contacts };
+}
+
+type LoaderData = { loaderData: { contacts: Array<Contact> } };
+type Contact = {
+  first: String;
+  last: String;
+  id: React.Key;
+  favorite: String;
+};
+
+// clientLoader results in loaderData
+export default function App({ loaderData }: LoaderData) {
+  const { contacts } = loaderData;
   return (
     <>
       <div id="sidebar">
@@ -33,15 +49,47 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <a href={`/contacts/1`}>Your Name</a>
+              <a href={`/contacts/1`}>
+                Your Name<span className="linktype ssr">server</span>
+              </a>
             </li>
             <li>
-              <a href={`/contacts/2`}>Your Friend</a>
+              <a href={`/contacts/2`}>
+                Your Friend <span className="linktype ssr">server</span>
+              </a>
             </li>
             <li>
-              <Link to='/contacts/3'>Your Next Best Friend</Link>
+              <Link to="/contacts/3">
+                Your Next Best Client Friend{" "}
+                <span className="linktype client">client</span>
+              </Link>
+            </li>
+            <li>
+              <hr />
             </li>
           </ul>
+          {contacts.length ? (
+            <ul>
+              {contacts.map((contact: Contact) => (
+                <li key={contact.id}>
+                  <Link to={`contacts/${contact.id}`}>
+                    {contact.first || contact.last ? (
+                      <>
+                        {contact.first} {contact.last}
+                      </>
+                    ) : (
+                      <i>No Name</i>
+                    )}
+                    {contact.favorite ? <span>*</span> : null}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>
+              <i>No contacts</i>
+            </p>
+          )}
         </nav>
       </div>
       <div id="detail">
