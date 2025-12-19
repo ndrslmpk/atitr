@@ -1,10 +1,8 @@
 {
-  "eslint.validate": ["javascript", "javascriptreact"],
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.fixAll.eslint": "explicit"
   },
-  "eslint.workingDirectories": ["./"],
   "editor.quickSuggestions": {
     "other": "off"
   },
@@ -15,5 +13,13 @@
   "emmet.includeLanguages": {
     "javascript": "javascriptreact"
   },
-  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly"
+  "emmet.showExpandedAbbreviation": "inMarkupAndStylesheetFilesOnly",
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "eslint.options": { "extensions": [".js", ".jsx", ".ts", ".tsx"] },
+  "eslint.workingDirectories": ["./"]
 }

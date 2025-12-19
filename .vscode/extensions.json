@@ -2,6 +2,7 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
+    "yoavbls.pretty-ts-errors"
     // Leave some inspirations
     // "mikestead.dotenv",
     // "hediet.vscode-drawio",
@@ -10,7 +11,6 @@
     // "hashicorp.terraform",
     // "firsttris.vscode-jest-runner",
     // "github.copilot-chat",
-    // "yoavbls.pretty-ts-errors",
     // "prisma.prisma",
     // "bradlc.vscode-tailwindcss",
     // "orta.vscode-jest"
