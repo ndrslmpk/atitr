@@ -1,7 +1,7 @@
 import { Form, Link, Outlet } from "react-router";
 import type { Route } from "./+types/sidebar";
 
-import { getContacts } from "../data";
+import { createEmptyContact, getContacts } from "../data";
 
 export async function clientLoader() {
   const contacts = await getContacts();
@@ -34,17 +34,17 @@ export default function Sidebar({ loaderData }: Route.ComponentProps) {
         <nav>
           <ul>
             <li>
-              <a href={`/contacts/1`}>
+              <a href={`/contacts/1-0`}>
                 Your Name<span className="linktype ssr">server</span>
               </a>
             </li>
             <li>
-              <a href={`/contacts/2`}>
+              <a href={`/contacts/2-0`}>
                 Your Friend <span className="linktype ssr">server</span>
               </a>
             </li>
             <li>
-              <Link to="/contacts/3">
+              <Link to="/contacts/3-0">
                 Your Next Best Client Friend{" "}
                 <span className="linktype client">client</span>
               </Link>

@@ -99,6 +99,27 @@ export async function deleteContact(id: string) {
   {
     avatar:
       "https://sessionize.com/image/124e-400o400o2-wHVdAuNaxi8KJrgtN3ZKci.jpg",
+    first: "1",
+    last: "0",
+    twitter: "@shrutikapoor08",
+  },
+  {
+    avatar:
+      "https://sessionize.com/image/124e-400o400o2-wHVdAuNaxi8KJrgtN3ZKci.jpg",
+    first: "2",
+    last: "0",
+    twitter: "@shrutikapoor08",
+  },
+  {
+    avatar:
+      "https://sessionize.com/image/124e-400o400o2-wHVdAuNaxi8KJrgtN3ZKci.jpg",
+    first: "3",
+    last: "0",
+    twitter: "@shrutikapoor08",
+  },
+  {
+    avatar:
+      "https://sessionize.com/image/124e-400o400o2-wHVdAuNaxi8KJrgtN3ZKci.jpg",
     first: "Shruti",
     last: "Kapoor",
     twitter: "@shrutikapoor08",
