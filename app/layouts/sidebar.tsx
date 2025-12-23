@@ -1,7 +1,15 @@
-import { Form, Link, NavLink, Outlet, useNavigation } from "react-router";
+import {
+  Form,
+  Link,
+  NavLink,
+  Outlet,
+  useNavigation,
+  useSubmit,
+} from "react-router";
 import type { Route } from "./+types/sidebar";
 
 import { createEmptyContact, getContacts } from "../data";
+import { useEffect, useState } from "react";
 
 export async function loader({ request }: Route.LoaderArgs) {
   const url = new URL(request.url);
@@ -13,6 +21,12 @@ export async function loader({ request }: Route.LoaderArgs) {
 export default function Sidebar({ loaderData }: Route.ComponentProps) {
   const { contacts, q } = loaderData;
   const navigation = useNavigation();
+  const submit = useSubmit();
+  const [query, setQuery] = useState(q || "");
+
+  useEffect(() => {
+    setQuery(q || "");
+  }, [q]);
 
   return (
     <>
@@ -21,14 +35,19 @@ export default function Sidebar({ loaderData }: Route.ComponentProps) {
           <Link to="product">Atitr Time Tracking</Link>
         </h1>
         <div>
-          <Form id="search-form" role="search">
+          <Form
+            id="search-form"
+            role="search"
+            onChange={(event) => submit(event.currentTarget)}
+          >
             <input
               aria-label="Search contacts"
-              defaultValue={q || ""}
               id="q"
               name="q"
               placeholder="Search"
               type="search"
+              onChange={(event) => setQuery(event.currentTarget.value)}
+              value={query}
             />
             <div aria-hidden hidden={true} id="search-spinner" />
           </Form>
