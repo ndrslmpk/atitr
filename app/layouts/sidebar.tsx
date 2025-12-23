@@ -3,8 +3,10 @@ import type { Route } from "./+types/sidebar";
 
 import { createEmptyContact, getContacts } from "../data";
 
-export async function clientLoader() {
-  const contacts = await getContacts();
+export async function loader({ request }: Route.LoaderArgs) {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  const contacts = await getContacts(q);
   return { contacts };
 }
 
