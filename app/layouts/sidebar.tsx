@@ -103,7 +103,7 @@ export default function SidebarLayout({ loaderData }: Route.ComponentProps) {
                     ) : (
                       <i>No Name</i>
                     )}
-                    {contact.favorite ? <span>*</span> : null}
+                    {contact.favorite ? <span>★</span> : null}
                   </NavLink>
                 </li>
               ))}
