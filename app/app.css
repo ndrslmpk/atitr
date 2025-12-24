@@ -287,6 +287,7 @@ i {
   width: 100%;
 }
 
+/* Makes the whole content page looking like transparent to signal loading */
 #detail.loading {
   opacity: 0.25;
   transition: opacity 200ms;

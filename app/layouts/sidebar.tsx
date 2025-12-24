@@ -18,11 +18,14 @@ export async function loader({ request }: Route.LoaderArgs) {
   return { contacts, q };
 }
 
-export default function Sidebar({ loaderData }: Route.ComponentProps) {
+export default function SidebarLayout({ loaderData }: Route.ComponentProps) {
   const { contacts, q } = loaderData;
   const navigation = useNavigation();
   const submit = useSubmit();
   const [query, setQuery] = useState(q || "");
+  const searching =
+    navigation.location &&
+    new URLSearchParams(navigation.location.search).has("q");
 
   useEffect(() => {
     setQuery(q || "");
@@ -42,6 +45,7 @@ export default function Sidebar({ loaderData }: Route.ComponentProps) {
           >
             <input
               aria-label="Search contacts"
+              className={searching ? "loading" : ""}
               id="q"
               name="q"
               placeholder="Search"
@@ -49,10 +53,12 @@ export default function Sidebar({ loaderData }: Route.ComponentProps) {
               onChange={(event) => setQuery(event.currentTarget.value)}
               value={query}
             />
-            <div aria-hidden hidden={true} id="search-spinner" />
+            <div aria-hidden hidden={!searching} id="search-spinner" />
           </Form>
           <Form method="post">
-            <button type="submit">New</button>
+            <button onClick={() => createEmptyContact()} type="submit">
+              New
+            </button>
           </Form>
         </div>
         <nav>
@@ -107,7 +113,9 @@ export default function Sidebar({ loaderData }: Route.ComponentProps) {
         </nav>
       </div>
       <div
-        className={navigation.state === "loading" ? "loading" : ""}
+        className={
+          navigation.state === "loading" && !searching ? "loading" : ""
+        }
         id="detail"
       >
         {/* TO be refactored into an own component */}
