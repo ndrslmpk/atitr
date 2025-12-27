@@ -1,3 +1,33 @@
+type TaskMutation = {
+  id?: string;
+  title?: string;
+  description?: string;
+  subtasks?: Array<TaskMutation>;
+};
+
+export type TaskRecord = TaskMutation & {
+  id: string;
+  createdAt: string;
+};
+
+const tasks = {
+  getAll() {
+    localStorage.getItem("tasks");
+  },
+  setTask(task: TaskMutation): Array<TaskMutation> {
+    const tasks = localStorage.getItem("tasks");
+    var arr: Array<TaskMutation>;
+    if (tasks === null) {
+      arr = [];
+    } else {
+      arr = JSON.parse(tasks);
+    }
+    arr.push(task);
+    localStorage.setItem("tasks", JSON.stringify(arr));
+    return arr;
+  },
+};
+
 ////////////////////////////////////////////////////////////////////////////////
 // 🛑 Nothing in here has anything to do with React Router, it's just a fake database
 ////////////////////////////////////////////////////////////////////////////////
