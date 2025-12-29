@@ -2,7 +2,8 @@
   "recommendations": [
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
-    "yoavbls.pretty-ts-errors"
+    "yoavbls.pretty-ts-errors",
+    "bradgashler.htmltagwrap" // allows you to use OPT+W to wrap html elements
     // Leave some inspirations
     // "mikestead.dotenv",
     // "hediet.vscode-drawio",

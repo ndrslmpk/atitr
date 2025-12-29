@@ -10,23 +10,50 @@ export type TaskRecord = TaskMutation & {
   createdAt: string;
 };
 
-const tasks = {
-  getAll() {
-    localStorage.getItem("tasks");
+const fakeTasks = {
+  records: {} as Record<string, TaskRecord>,
+
+  async getAll(): Promise<TaskRecord[]> {
+    var rawTasks = localStorage.getItem("tasks");
+    var tasks = [];
+    if (rawTasks !== null) {
+      const parsed = JSON.parse(rawTasks);
+      Array.isArray(parsed) ? (tasks = parsed) : [];
+    }
+    return tasks;
   },
-  setTask(task: TaskMutation): Array<TaskMutation> {
+  async create(task: TaskMutation): Promise<TaskRecord[]> {
     const tasks = localStorage.getItem("tasks");
-    var arr: Array<TaskMutation>;
+    const id = task.id || Math.random().toString(36).substring(2, 9);
+    const createdAt = new Date().toISOString();
+    var newTask: TaskRecord = {
+      id: id,
+      createdAt: createdAt,
+      ...task,
+    };
+    var arr: TaskRecord[];
     if (tasks === null) {
       arr = [];
     } else {
       arr = JSON.parse(tasks);
     }
-    arr.push(task);
+    arr.push(newTask);
+    fakeTasks.records[id] = newTask;
     localStorage.setItem("tasks", JSON.stringify(arr));
     return arr;
   },
 };
+
+export async function getTasks() {
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  let tasks = await fakeTasks.getAll();
+  return tasks;
+}
+
+export async function createEmptyTask() {
+  const task = await fakeTasks.create({});
+  return task;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // 🛑 Nothing in here has anything to do with React Router, it's just a fake database
