@@ -11,19 +11,18 @@ export type TaskRecord = TaskMutation & {
 };
 
 const fakeTasks = {
-  records: {} as Record<string, TaskRecord>,
+  // is just an in-memory database on server-side
+  records: {} as Record<string, TaskRecord>, // works like a hash-table
 
   async getAll(): Promise<TaskRecord[]> {
-    var rawTasks = localStorage.getItem("tasks");
-    var tasks = [];
-    if (rawTasks !== null) {
-      const parsed = JSON.parse(rawTasks);
-      Array.isArray(parsed) ? (tasks = parsed) : [];
+    if (Object.keys(fakeTasks.records).length > 0) {
+      return Object.values(this.records)
+        .map((r) => r)
+        .sort((task1, task2) => (task1.createdAt > task2.createdAt ? 1 : -1));
     }
-    return tasks;
+    return [];
   },
-  async create(task: TaskMutation): Promise<TaskRecord[]> {
-    const tasks = localStorage.getItem("tasks");
+  async create(task: TaskMutation): Promise<TaskRecord> {
     const id = task.id || Math.random().toString(36).substring(2, 9);
     const createdAt = new Date().toISOString();
     var newTask: TaskRecord = {
@@ -31,16 +30,8 @@ const fakeTasks = {
       createdAt: createdAt,
       ...task,
     };
-    var arr: TaskRecord[];
-    if (tasks === null) {
-      arr = [];
-    } else {
-      arr = JSON.parse(tasks);
-    }
-    arr.push(newTask);
     fakeTasks.records[id] = newTask;
-    localStorage.setItem("tasks", JSON.stringify(arr));
-    return arr;
+    return newTask;
   },
 };
 

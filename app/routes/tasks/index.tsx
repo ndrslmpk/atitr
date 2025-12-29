@@ -2,14 +2,14 @@ import { createEmptyTask, getTasks } from "../../data";
 import type { Route } from "./+types/index";
 import { Form, NavLink } from "react-router";
 
-export async function clientLoader() {
+export async function loader() {
   let tasks = await getTasks();
 
   return { tasks };
 }
 
-export async function clientAction({ request }: Route.ActionArgs) {
-  return createEmptyTask();
+export async function action({ request }: Route.ActionArgs) {
+  await createEmptyTask();
 }
 
 export default function Component({ loaderData }: Route.ComponentProps) {
@@ -19,9 +19,7 @@ export default function Component({ loaderData }: Route.ComponentProps) {
       <div className="flex">
         <h1>Tasks</h1>
         <Form method="post">
-          <button onClick={() => createEmptyTask()} type="submit">
-            New
-          </button>
+          <button type="submit">New</button>
         </Form>
       </div>
       <ul>
